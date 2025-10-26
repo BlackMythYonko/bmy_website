@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Manager</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/popups.css" />
+    <link rel="stylesheet" href="css/scrollbars.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/items.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+</head>
+<body>
+
+    <!-- Render Header Section -->
+    <header class="main-header">
+        <!-- Logo & Title -->
+        <img src="resources/images/pp_discord_.png" alt="Logo" class="logo-img" />
+        <div class="logo-title">Black Myth Yonko</div>
+        <!-- Main Title -->
+        <div class="main-title">📦Item Manager</div>
+    </header>
+
+    <!-- Render Main Section -->
+    <main class="container">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button onclick="App.addDefaultItem()">➕ Add Item</button>
+            <button onClick="App.importItems()">📥 Import Items</button>
+            <input type="file" id="fileInputImportItems" accept=".json" style="display: none;">
+            <button onClick="App.exportItems()">💾 Export Items</button>
+        </div>
+
+        <!-- Items List -->
+        <div class="items-list-container">
+            <div class="items-scrollable-list" id="itemsList"></div>
+        </div>
+    </main>
+
+    <!-- Script Section -->
+    <script src="js/item_data.js"></script>
+    <script src="js/popup_confirm_delete_item.js"></script>
+    <script src="js/popup_item_form.js"></script>
+    <script src="js/schema.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        App.attachListeners();
+        App.renderItems();
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* ######################################## MAIN STYLES ######################################## */
+
+::-webkit-scrollbar-track {
+    background: var(--color-2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--btn-color-hover);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--btn-color-hover);
+}
+
+body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--btn-color-hover) var(--color-2);
+}
+
+/* ###################################### SPECIFIC STYLES ###################################### */
+
+/* ---------------------------------- Form Container Scrollbar --------------------------------- */
+
+.form-container::-webkit-scrollbar-track {
+    background: var(--color-3);
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background: var(--btn-color);
+    border-radius: 4px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+    background: var(--btn-color-hover);
+}
+
+.form-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--btn-color) var(--color-3);
+}

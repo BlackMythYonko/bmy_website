@@ -1,0 +1,93 @@
+.items-list-container {
+    margin-top: var(--items-container-y-padding);
+    mask-image: 
+        linear-gradient(to bottom, transparent 0%, black var(--items-gradient-height)),
+        linear-gradient(to top, transparent 0%, black var(--items-gradient-height));
+    -webkit-mask-image: 
+        linear-gradient(to bottom, transparent 0%, black var(--items-gradient-height)),
+        linear-gradient(to top, transparent 0%, black var(--items-gradient-height));
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+.items-scrollable-list {
+    padding: var(--items-gradient-height) 10px 10px 10px;
+    max-height: calc(100vh - calc(var(--header-height) + var(--container-y-padding) + var(--toolbar-height) + var(--items-container-y-padding)));
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px;
+}
+
+.item-card {
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px;
+    background-color: var(--color-2);
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;
+    background-color: var(--color-1);
+}
+
+.item-card .icon {
+    font-size: 4em;
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-card .name {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: var(--high-font-size);
+    color: var(--text-light-color);
+}
+
+.item-card .category {
+    font-size: var(--normal-font-size);
+    color: var(--text-medium-color);
+}
+
+.delete-item-btn {
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--btn-delete-color);
+    color: white;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 4px;
+}
+
+.item-card:hover .delete-item-btn,
+.delete-item-btn:hover {
+    opacity: 1;
+}
+
+.delete-item-btn:hover {
+    background-color: var(--btn-delete-color-hover);
+}
+
+.delete-item-btn:active {
+    background-color: var(--btn-delete-color-active);
+}

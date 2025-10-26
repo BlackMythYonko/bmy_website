@@ -1,0 +1,36 @@
+:root {
+    /* Sizes */
+    --header-height: 70px;
+    --toolbar-height: 80px;
+    --container-x-padding: 75px;
+    --container-y-padding: 30px;
+    --items-container-y-padding: 10px;
+    --items-gradient-height: 15px;
+
+    /* Font Sizes */
+    --normal-font-size: 0.85rem;
+    --high-font-size: 1rem;
+
+    /* Text Colors */
+    --title-color: whitesmoke;
+    --text-light-color: #DADADC;
+    --text-medium-color: #a0a0a0;
+    --text-low-color: grey;
+    --text-very-low-color: #5e5e5e;
+
+    /* Btn Colors */
+    --btn-color: #28282C;
+    --btn-color-hover: #313136;
+    --btn-color-active: #28282C;
+    --btn-delete-color: #c82333;
+    --btn-delete-color-hover: #dc3545;
+    --btn-delete-color-active: #a21c2a;
+    --btn-confirm-color: #35962c;
+    --btn-confirm-color-hover: #47ba3d;
+    --btn-confirm-color-active: #257a1e;
+    
+    /* Other Colors */
+    --color-1: #19191D;
+    --color-2: #212226;
+    --color-3: #303137;
+}

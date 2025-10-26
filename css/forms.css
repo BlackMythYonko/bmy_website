@@ -1,0 +1,94 @@
+/* ######################################## MAIN STYLES ######################################## */
+
+.form-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 10px;
+    mask-image: 
+        linear-gradient(to bottom, transparent 0%, black var(--items-gradient-height)),
+        linear-gradient(to top, transparent 0%, black var(--items-gradient-height));
+    -webkit-mask-image: 
+        linear-gradient(to bottom, transparent 0%, black var(--items-gradient-height)),
+        linear-gradient(to top, transparent 0%, black var(--items-gradient-height));
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+optional {
+    color: var(--text-very-low-color);
+    margin: 10px 0;
+}
+
+form-label {
+    display: block;
+    text-align: left;
+    font-size: 1.2rem;
+    color: var(--text-light-color);
+    margin: 30px 0 10px 0;
+    padding: 0 0 5px 0;
+    border-bottom: solid;
+    border-color: var(--color-3);
+}
+
+form-group {
+    text-align: left;
+    display: block;
+    margin-bottom: 13px;
+}
+
+form-group input:disabled {
+    color: var(--text-low-color);
+    font-weight: bold;
+}
+
+/* ---------------------------------- Inner Form Group Styles ---------------------------------- */
+
+form-group label {
+    display: block;
+    color: var(--text-light-color);
+    font-size: var(--normal-font-size);
+    margin-bottom: 3px;
+}
+
+form-group input,
+form-group select,
+form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: var(--color-3);
+    color: var(--text-light-color);
+    font-size: var(--normal-font-size);
+}
+
+form-group input[type="checkbox"] {
+    width: auto;
+}
+
+form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+form-group .effects-group {
+    background-color: var(--color-1);
+    padding: 15px 15px;
+    border-radius: 5px;
+}
+
+form-group .effect-item {
+    background-color: var(--color-2);
+    margin: 15px 0 0 0;
+    padding: 20px 10px 10px 10px;
+    border-radius: 5px;
+}
+
+/* ###################################### SPECIFIC STYLES ###################################### */
+
+/* -------------------------------------- Popup Item Form -------------------------------------- */
+
+#popup-item-form .popup-buttons {
+    padding-top: 10px;
+}

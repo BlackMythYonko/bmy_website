@@ -1,0 +1,56 @@
+/* ######################################## MAIN STYLES ######################################## */
+
+button {
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 6px;
+    font-weight: bold;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    color: var(--text-light-color);
+    background-color: var(--btn-color);
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--btn-color-hover);
+    transform: scale(1.04);
+}
+
+button:active {
+    background-color: var(--btn-color-active);
+}
+
+/* ###################################### SPECIFIC STYLES ###################################### */
+
+/* --------------------------------------- Delete Button --------------------------------------- */
+
+.delete-btn {
+    background: var(--btn-delete-color);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: var(--btn-delete-color-hover);
+}
+
+.delete-btn:active {
+    background: var(--btn-delete-color-active);
+}
+
+/* --------------------------------------- Confirm Button -------------------------------------- */
+
+.confirm-btn {
+    background: var(--btn-confirm-color);
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: var(--btn-confirm-color-hover);
+}
+
+.confirm-btn:active {
+    background: var(--btn-confirm-color-active);
+}
