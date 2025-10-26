@@ -28,10 +28,12 @@
     <main class="container">
         <!-- Toolbar -->
         <div class="toolbar">
-            <button onclick="App.addDefaultItem()">➕ Add Item</button>
+            <button class="highlight-btn" onclick="App.addDefaultItem()">➕ Add Item</button>
+            <button class="delete-btn" onclick="App.openPopupConfirmDeletAllItems()">🗑️ Delete All</button>
             <button onClick="App.importItems()">📥 Import Items</button>
             <input type="file" id="fileInputImportItems" accept=".json" style="display: none;">
             <button onClick="App.exportItems()">💾 Export Items</button>
+            <input type="search" id="item-search" placeholder="Search Item" onchange="App.onInputSearchItemChanged()"/>
         </div>
 
         <!-- Items List -->
@@ -42,7 +44,7 @@
 
     <!-- Script Section -->
     <script src="../js/item_data.js"></script>
-    <script src="../js/popup_confirm_delete_item.js"></script>
+    <script src="../js/popup_confirm.js"></script>
     <script src="../js/popup_item_form.js"></script>
     <script src="../js/schema.js"></script>
     <script src="../js/main.js"></script>

@@ -25,6 +25,21 @@ button:active {
 
 /* ###################################### SPECIFIC STYLES ###################################### */
 
+/* -------------------------------------- Highlight Button ------------------------------------- */
+
+.highlight-btn {
+    background: var(--btn-highlight-color);
+    color: white;
+}
+
+.highlight-btn:hover {
+    background: var(--btn-highlight-color-hover);
+}
+
+.highlight-btn:active {
+    background: var(--btn-highlight-color-active);
+}
+
 /* --------------------------------------- Delete Button --------------------------------------- */
 
 .delete-btn {

@@ -56,11 +56,19 @@ form-group select,
 form-group textarea {
     width: 100%;
     padding: 8px;
-    border: none;
+    outline: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     background: var(--color-3);
     color: var(--text-light-color);
     font-size: var(--normal-font-size);
+    transition: all 0.2s ease;
+}
+
+form-group input:focus,
+form-group select:focus,
+form-group textarea:focus {
+    border-color: white;
 }
 
 form-group input[type="checkbox"] {

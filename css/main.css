@@ -1,3 +1,5 @@
+/* ######################################## MAIN STYLES ######################################## */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +9,20 @@
 body {
     font-family: Arial, sans-serif;
     background-color: var(--color-3);
+}
+
+input,
+select,
+textarea {
+    outline: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--text-light-color);
 }
 
 .container {
@@ -37,3 +53,20 @@ body {
     align-items: center;
     z-index: 2000;
 }
+
+#item-search {
+    height: 40px;
+    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    margin-left: auto;
+    background: var(--color-3);
+    color: var(--text-light-color);
+    font-size: var(--normal-font-size);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+

@@ -22,6 +22,9 @@
     --btn-color: #28282C;
     --btn-color-hover: #313136;
     --btn-color-active: #28282C;
+    --btn-highlight-color: #6d17cf;
+    --btn-highlight-color-hover: #8038d2;
+    --btn-highlight-color-active: #5913a9;
     --btn-delete-color: #c82333;
     --btn-delete-color-hover: #dc3545;
     --btn-delete-color-active: #a21c2a;

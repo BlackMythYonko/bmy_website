@@ -2,6 +2,11 @@
 
 window.App = window.App || {};
 App.items = JSON.parse(localStorage.getItem("items")) || [];
+App.filteredItems = App.items.slice();
+App.itemFilters = {
+    name: "",
+    category: ""
+};
 
 // ######################################## PUBLIC METHODS ########################################
 
@@ -19,6 +24,7 @@ App.addDefaultItem = function()
 
     // Add Item
     App.items.push(defaultItem);
+    App.filteredItems.push(defaultItem);
     App.saveItems();
     App.renderItems();
 }
@@ -68,6 +74,7 @@ App.importItemsFromFile = function(file)
             // Save items
             if (validItems.length > 0) {
                 App.items.push(...validItems);
+                App.filteredItems.push(...validItems);
                 App.saveItems();
                 App.renderItems();
                 alert(`✅ ${validItems.length} item(s) successfully imported`);
@@ -125,19 +132,55 @@ App.createDefaultItem = function()
 
 App.saveItems = function() 
 {
-    localStorage.setItem('items', JSON.stringify(App.items));
+    localStorage.setItem("items", JSON.stringify(App.items));
 }
 
 App.deleteItem = function(itemIndex) 
 {
+    const item = App.items[itemIndex];
     App.items.splice(itemIndex, 1);
+    App.removeItemFromFilter(item);
     App.saveItems();
+    App.renderItems();
+}
+
+App.deleteAllItems = function()
+{
+    App.items.length = 0;
+    App.filteredItems.length = 0;
+    localStorage.removeItem("items");
     App.renderItems();
 }
 
 App.updateItem = function(itemIndex, updatedItem) 
 {
     App.items[itemIndex] = updatedItem;
+    App.updateItemInFilter(itemIndex, updatedItem);
     App.saveItems();
     App.renderItems();
+}
+
+App.updateItemInFilter = function(itemIndex, updatedItem)
+{
+    const filteredIndex = App.filteredItems.findIndex(item => item.id === App.items[itemIndex].id);
+    if (filteredIndex !== -1) {
+        App.filteredItems[filteredIndex] = updatedItem;
+    }
+}
+
+App.removeItemFromFilter = function(item)
+{
+    const filteredIndex = App.filteredItems.indexOf(item);
+    if (filteredIndex !== -1) {
+        App.filteredItems.splice(filteredIndex, 1);
+    }
+}
+
+App.updateFilteredItems = function()
+{
+    App.filteredItems = App.items.filter(item => {
+        const matchesName = item.name.toLowerCase().includes(App.itemFilters.name.toLowerCase());
+        const matchesCategory = !App.itemFilters.category || item.category === App.itemFilters.category;
+        return matchesName && matchesCategory;
+    });
 }
