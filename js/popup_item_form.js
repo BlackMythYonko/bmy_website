@@ -297,7 +297,7 @@ App.PopupItemForm = class
 
         // Validate item
         const result = App.validateSchema(updatedItem);
-        if (result.sucess) {
+        if (result.success) {
             if (typeof this.onUpdateCallback === "function") {
                 this.onUpdateCallback(this.itemIndex, updatedItem);
             }

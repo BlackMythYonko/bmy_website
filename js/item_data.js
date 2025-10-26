@@ -56,7 +56,7 @@ App.importItemsFromFile = function(file)
             // Handle Error in item
             const validItems = [];
             for (const item of importedItems) {
-                const result = App.validateSchema(item);
+                const result = App.validateSchema(item, true);
                 if (result.success) {
                     validItems.push(item);
                 } else {

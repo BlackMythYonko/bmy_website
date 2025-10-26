@@ -115,7 +115,7 @@ App.schema = {
 
 // ######################################## PUBLIC METHODS ########################################
 
-App.validateSchema = function(item) 
+App.validateSchema = function(item, checkIsUniqueId = false) 
 {
     // Check required fields
     const required = App.schema.items.required;
@@ -127,7 +127,7 @@ App.validateSchema = function(item)
         return { success: false, message: "Invalid ID" };
 
     // Check id uniqueness
-    if (App.items.some(existingItem => existingItem.id === item.id))
+    if (checkIsUniqueId && App.items.some(existingItem => existingItem.id === item.id))
         return { success: false, message: "ID already exists" };
 
     console.log(item);
