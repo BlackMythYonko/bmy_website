@@ -34,6 +34,11 @@
             <input type="file" id="fileInputImportItems" accept=".json" style="display: none;">
             <button onClick="App.exportItems()">💾 Export Items</button>
             <input type="search" id="item-search" placeholder="Search Item" onchange="App.onInputSearchItemChanged()"/>
+            <select id="category-filter" onchange="App.onCategoryFilterChanged()">
+                <option value="">All Categories</option>
+                <option value="Consommable">Consommable</option>
+                <option value="Skin">Skin</option>
+            </select>
         </div>
 
         <!-- Items List -->

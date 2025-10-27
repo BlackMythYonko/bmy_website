@@ -44,9 +44,19 @@ App.openPopupItemForm = function(itemIndex)
 
 App.onInputSearchItemChanged = function()
 {
-    const searchInput = document.querySelector('#item-search');
+    const searchInput = document.querySelector("#item-search");
     if (searchInput) {
         App.itemFilters.name = searchInput.value.trim();
+        App.updateFilteredItems();
+        App.renderItems();
+    }
+}
+
+App.onCategoryFilterChanged = function()
+{
+    const categoryFilter = document.querySelector("#category-filter");
+    if (categoryFilter) {
+        App.itemFilters.category = categoryFilter.value;
         App.updateFilteredItems();
         App.renderItems();
     }
