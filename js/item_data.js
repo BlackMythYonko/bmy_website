@@ -112,6 +112,24 @@ App.exportItems = function()
     URL.revokeObjectURL(url);
 }
 
+App.exportItem = function(itemIndex) 
+{
+    // Variables
+    const item = App.items[itemIndex];
+    const dataStr = JSON.stringify(item, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    // Create file
+    link.href = url;
+    link.download = "item.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
 App.createDefaultItem = function() 
 {
     // Create default item
@@ -172,6 +190,29 @@ App.updateItem = function(itemIndex, updatedItem)
 {
     App.items[itemIndex] = updatedItem;
     App.updateItemInFilter(itemIndex, updatedItem);
+    App.saveItems();
+    App.renderItems();
+}
+
+App.duplicateItem = function(itemIndex)
+{
+    // Generate item copy
+    const duplicatedItem = JSON.parse(JSON.stringify(App.items[itemIndex]));
+    duplicatedItem.id = crypto.randomUUID();
+    duplicatedItem.name = `${duplicatedItem.name} Copy`;
+
+    // Validate new item
+    const result = App.validateSchema(duplicatedItem, true);
+    if (!result.success) {
+        alert(`❌ Error in duplicate: ${result.message}`);
+        return;
+    }
+
+    // Insert after original
+    App.items.splice(itemIndex + 1, 0, duplicatedItem);
+    App.filteredItems.splice(itemIndex + 1, 0, duplicatedItem);
+
+    // Save items and refresh
     App.saveItems();
     App.renderItems();
 }

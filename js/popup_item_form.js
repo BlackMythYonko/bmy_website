@@ -384,8 +384,8 @@ App.PopupItemForm = class
             rarity: form.querySelector("#rarity").value,
 
             // DETAILS
-            image: form.querySelector("#image").value || null,
-            description: form.querySelector("#description").value || null,
+            image: form.querySelector("#image").value,
+            description: form.querySelector("#description").value,
 
             // POSSESS SETTINGS
             is_unique: form.querySelector("#is_unique").checked,
@@ -398,7 +398,7 @@ App.PopupItemForm = class
             is_consumable: form.querySelector("#is_consumable").checked,
 
             // EFFECTS
-            effects: effects.length > 0 ? effects : [],
+            effects: effects,
 
             // ENABLED
             enabled: form.querySelector("#enabled").checked

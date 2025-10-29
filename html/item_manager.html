@@ -6,6 +6,7 @@
     <title>Item Manager</title>
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/action_menu.css" />
     <link rel="stylesheet" href="../css/buttons.css" />
     <link rel="stylesheet" href="../css/popups.css" />
     <link rel="stylesheet" href="../css/scrollbars.css" />
@@ -67,7 +68,15 @@
                 </select>
             </div>
         </div>
-        
+
+        <!-- Render Item Action Menu -->
+        <div class="action-menu-container" id="#item-action-menu-container">
+            <div class="action-menu" id="#item-action-menu">
+                <a href="#" onclick="App.closeItemActionMenu(); App.duplicateItem(App.itemActionMenuID)">Duplicate</a>
+                <a href="#" onclick="App.closeItemActionMenu(); App.exportItem(App.itemActionMenuID)">Download</a>
+                <a href="#" class="danger" onclick="App.closeItemActionMenu(); App.openPopupConfirmDeleteItem(App.itemActionMenuID)">Delete</a>
+            </div>
+        </div>
     </main>
 
     <!-- Script Section -->

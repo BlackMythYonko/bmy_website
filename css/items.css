@@ -42,7 +42,8 @@
     background-color: var(--color-2);
 }
 
-.item-card:hover {
+.item-card:hover,
+.item-card.active {
     transform: scale(1.05);
     box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;
     background-color: var(--color-1);
@@ -70,7 +71,7 @@
     color: var(--text-medium-color);
 }
 
-.delete-item-btn {
+.action-item-btn {
     opacity: 0;
     position: absolute;
     top: 8px;
@@ -79,24 +80,26 @@
     height: 30px;
     border-radius: 50%;
     border: none;
-    background-color: var(--btn-delete-color);
+    background-color: var(--btn-color);
     color: white;
     font-size: var(--normal-font-size);
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 4px;
 }
 
-.item-card:hover .delete-item-btn,
-.delete-item-btn:hover {
+.item-card:hover .action-item-btn,
+.item-card.active .action-item-btn,
+.action-item-btn:hover,
+.action-item-btn.active {
     opacity: 1;
 }
 
-.delete-item-btn:hover {
-    background-color: var(--btn-delete-color-hover);
+.action-item-btn:hover {
+    background-color: var(--btn-color-hover);
 }
 
-.delete-item-btn:active {
-    background-color: var(--btn-delete-color-active);
+.action-item-btn:active {
+    background-color: var(--btn-color-active);
 }
 
 .item-card::after {

@@ -1,6 +1,7 @@
 // ########################################### VARIABLES ##########################################
 
 window.App = window.App || {};
+App.itemActionMenuID = null;
 
 // ########################################### FUNCTIONS ##########################################
 
@@ -15,6 +16,15 @@ App.attachListeners = function()
         if (file) {
             App.importItemsFromFile(file);
             fileInputImportItems.value = "";
+        }
+    });
+
+    // Add click event: close item action menu
+    window.addEventListener("click", (event) => {
+        const menu = document.getElementById("#item-action-menu");
+        const btn = event.target.closest(".action-btn");
+        if (!btn && !menu.contains(event.target)) {
+            App.closeItemActionMenu();
         }
     });
 }
@@ -72,6 +82,53 @@ App.onRarityFilterChanged = function()
     }
 }
 
+App.toggleItemActionMenu = function(button, itemID)
+{
+    // Variables
+    const container = document.getElementById("#item-action-menu-container");
+    const menu = document.getElementById("#item-action-menu");
+    
+    // Close all other menus
+    document.querySelectorAll(".item-action-menu.show").forEach(openMenu => {
+        if (openMenu !== menu) {
+            openMenu.classList.remove("show");
+        }
+    });
+
+    // Clear all active cards
+    App.clearActiveItemsCards();
+
+    // Handle show menu
+    if (container.classList.toggle("show")) {
+        App.itemActionMenuID = itemID
+
+        // Active item card
+        const itemCard = button.closest(".item-card");
+        itemCard.classList.add("active");
+
+        // Set menu pos
+        const rect = button.getBoundingClientRect();
+        menu.style.top = `${rect.bottom - button.offsetHeight + window.scrollY}px`;
+        menu.style.left = `${rect.right + window.scrollX + 5}px`;
+    }
+    // Handle hide menu
+    else {
+        App.itemActionMenuID = null
+    }
+}
+
+App.closeItemActionMenu = function() {
+    App.clearActiveItemsCards();
+    document.getElementById("#item-action-menu-container").classList.remove("show");
+    currentItemId = null;
+}
+
+App.clearActiveItemsCards = function() {
+    document.querySelectorAll(".item-card.active").forEach(el => {
+    el.classList.remove("active");
+    });
+}
+
 App.renderItems = function() 
 {
     // Variables
@@ -84,7 +141,7 @@ App.renderItems = function()
             <div class="icon">${item.icon}</div>
             <div class="name">${item.name}</div>
             <div class="category">${item.category}</div>
-            <button class="delete-item-btn" onclick="event.stopPropagation(); App.openPopupConfirmDeleteItem(${App.items.length - 1 - reversedIndex})">🗑️</button>
+            <button class="action-item-btn" onclick="event.stopPropagation(); App.toggleItemActionMenu(this, ${App.items.length - 1 - reversedIndex})">⁝</button>
         </div>
     `).join("");
 }

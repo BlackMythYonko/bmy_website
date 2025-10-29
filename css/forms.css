@@ -17,6 +17,7 @@
 
 .form-label-checkbox {
     width: fit-content;
+    cursor: pointer;
 }
 
 optional {
