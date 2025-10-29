@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/popups.css" />
     <link rel="stylesheet" href="../css/scrollbars.css" />
     <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/filters.css" />
     <link rel="stylesheet" href="../css/items.css" />
     <link rel="stylesheet" href="../css/forms.css" />
 </head>
@@ -26,6 +27,7 @@
 
     <!-- Render Main Section -->
     <main class="container">
+
         <!-- Toolbar -->
         <div class="toolbar">
             <button class="highlight-btn" onclick="App.addDefaultItem()">➕ Add Item</button>
@@ -33,18 +35,39 @@
             <button onClick="App.importItems()">📥 Import Items</button>
             <input type="file" id="fileInputImportItems" accept=".json" style="display: none;">
             <button onClick="App.exportItems()">💾 Export Items</button>
-            <input type="search" id="item-search" placeholder="Search Item" onchange="App.onInputSearchItemChanged()"/>
-            <select id="category-filter" onchange="App.onCategoryFilterChanged()">
-                <option value="">All Categories</option>
-                <option value="Consommable">Consommable</option>
-                <option value="Skin">Skin</option>
-            </select>
+            <button style="margin-left: auto;" onClick="App.copyJsonSchema()">📄 Copy Schema</button>
         </div>
 
-        <!-- Items List -->
-        <div class="items-list-container">
-            <div class="items-scrollable-list" id="itemsList"></div>
+        <!-- Render Sub Container -->
+        <div class="sub-container">
+
+            <!-- Items List -->
+            <div class="items-list-container">
+                <div class="items-scrollable-list" id="itemsList"></div>
+            </div>
+
+            <!-- Filters Panel -->
+            <div class="filers-panel">
+                <input type="search" class="filter-input" id="item-search-filter" placeholder="Search Item" onchange="App.onInputSearchItemChanged()"/>
+                <select class="filter-selector" id="category-filter" onchange="App.onCategoryFilterChanged()">
+                    <option value="">All Categories</option>
+                    <option value="Consommable">Consommable</option>
+                    <option value="Pet">Pet</option>
+                    <option value="Skin">Skin</option>
+                </select>
+                <select class="filter-selector" id="rarity-filter" onchange="App.onRarityFilterChanged()">
+                    <option value="">All Rarities</option>
+                    <option value="Common"> ⬜ Common</option>
+                    <option value="Uncommon">🟩 Uncommon</option>
+                    <option value="Rare">🟦 Rare</option>
+                    <option value="Epic">🟪 Epic</option>
+                    <option value="Legendary">🟧 Legendary</option>
+                    <option value="Mythic">🟥 Mythic</option>
+                    <option value="Divine">⬛ Divine</option>
+                </select>
+            </div>
         </div>
+        
     </main>
 
     <!-- Script Section -->

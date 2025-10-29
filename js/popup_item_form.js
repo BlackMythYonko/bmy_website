@@ -40,7 +40,6 @@ App.PopupItemForm = class
         // Add render form
         const container = this.popup.querySelector("#itemFormContainer");
         this.#renderForm(container);
-        this.#initFormContent(container);
 
         // Attach listeners
         this.#attachListeners();
@@ -58,7 +57,8 @@ App.PopupItemForm = class
         // Add form content
         container.innerHTML = `
             <form id="editItemForm">
-                <form-label>⚙️ Main Settings</form-label>
+
+                <form-label>🪪 Identity</form-label>
                 <form-group>
                     <label>ID</label>
                     <input type="text" value="${item.id}" disabled>
@@ -77,11 +77,27 @@ App.PopupItemForm = class
                 <form-group>
                     <label>Category</label>
                     <select id="category" required>
-                        <option value="Consommable">Consommable</option>
-                        <option value="Skin">Skin</option>
+                        <option value="Consommable" ${item.category === "Consommable" ? "selected" : ""}>Consommable</option>
+                        <option value="Pet" ${item.category === "Pet" ? "selected" : ""}>Pet</option>
+                        <option value="Skin" ${item.category === "Skin" ? "selected" : ""}>Skin</option>
                     </select>
                 </form-group>
 
+                <form-group>
+                    <label>Rarity</label>
+                    <select id="rarity" required>
+                        <option value="Common" ${item.rarity === "Common" ? "selected" : ""}>⬜ Common</option>
+                        <option value="Uncommon" ${item.rarity === "Uncommon" ? "selected" : ""}>🟩 Uncommon</option>
+                        <option value="Rare" ${item.rarity === "Rare" ? "selected" : ""}>🟦 Rare</option>
+                        <option value="Epic" ${item.rarity === "Epic" ? "selected" : ""}>🟪 Epic</option>
+                        <option value="Legendary" ${item.rarity === "Legendary" ? "selected" : ""}>🟧 Legendary</option>
+                        <option value="Mythic" ${item.rarity === "Mythic" ? "selected" : ""}>🟥 Mythic</option>
+                        <option value="Divine" ${item.rarity === "Divine" ? "selected" : ""}>⬛ Divine</option>
+                    </select>
+                </form-group>
+
+
+                <form-label>📝 Details</form-label>
                 <form-group>
                     <label>Image <optional>(optional)</optional></label>
                     <input type="text" id="image" value="${item.image || ''}">
@@ -92,26 +108,50 @@ App.PopupItemForm = class
                     <textarea id="description">${item.description || ''}</textarea>
                 </form-group>
                 
+
+                <form-label>💼 Possess Settings</form-label>
                 <form-group>
-                    <label>
+                    <label class="form-label-checkbox">
                         <input type="checkbox" id="is_unique" ${item.is_unique ? 'checked' : ''}>
                         Is Unique
                     </label>
                 </form-group>
 
+                <form-group id="max_stack_grp" style="display: ${item.is_unique ? 'none' : 'block'}">
+                    <label>Max Stack <optional>(0 for no limit)</optional></label>
+                    <input type="number" id="max_stack" min="0" value="${item.max_stack}" required>
+                </form-group>
+
+
+                <form-label>👆 Use Settings</form-label>
                 <form-group>
-                    <label>
-                        <input type="checkbox" id="is_consumable" ${item.is_consumable ? 'checked' : ''}>
-                        Is Consommable
+                    <label class="form-label-checkbox">
+                        <input type="checkbox" id="usable" ${item.usable ? 'checked' : ''}>
+                        Usable
                     </label>
                 </form-group>
 
-                <form-group id="auto_use_container" style="display: ${item.is_consumable ? 'block' : 'none'}">
-                    <label>
+                <form-group id="auto_use_grp" style="display: ${item.usable ? 'block' : 'none'}">
+                    <label class="form-label-checkbox">
                         <input type="checkbox" id="auto_use" ${item.auto_use ? 'checked' : ''}>
                         Auto Use
                     </label>
                 </form-group>
+
+                <form-group id="allow_multiple_use_grp" style="display: ${item.usable ? 'block' : 'none'}">
+                    <label class="form-label-checkbox">
+                        <input type="checkbox" id="allow_multiple_use" ${item.allow_multiple_use ? 'checked' : ''}>
+                        Allow Multiple Use
+                    </label>
+                </form-group>
+
+                <form-group id="is_consumable_grp" style="display: ${item.usable ? 'block' : 'none'}">
+                    <label class="form-label-checkbox">
+                        <input type="checkbox" id="is_consumable" ${item.is_consumable ? 'checked' : ''}>
+                        Is Consomable
+                    </label>
+                </form-group>
+
 
                 <form-label>✨ Effects <optional>(optional)</optional></form-label>
                 <form-group>
@@ -122,36 +162,31 @@ App.PopupItemForm = class
                         </div>
                     </div>
                 </form-group>
+
+
+                <form-group>
+                    <label class="form-label-checkbox">
+                        <input type="checkbox" id="enabled" ${item.enabled ? 'checked' : ''}>
+                        Enabled
+                    </label>
+                </form-group>
             </form>
         `;
-    }
-
-    #initFormContent(container)
-    {
-        const item = this.items[this.itemIndex];
-        container.querySelector("#category").value = item.category;
     }
 
     #attachListeners() 
     {
         // Variables
         const form = this.popup.querySelector("#editItemForm");
-        const isConsumableCheckbox = form.querySelector("#is_consumable");
-        const autoUseContainer = form.querySelector("#auto_use_container");
-
-        // Add Cancel Button listener
-        this.popup.querySelector(".cancel-btn").addEventListener("click", () => {
-            this.popup.remove();
-        });
 
         // Add Form Submit listener
         form.addEventListener("submit", (event) => {
             this.#handleSubmitCallback(event, form);
         });
 
-        // Add isConsumableCheckbox changed Listener
-        isConsumableCheckbox.addEventListener("change", () => {
-            autoUseContainer.style.display = isConsumableCheckbox.checked ? "block" : "none";
+        // Add Cancel Button listener
+        this.popup.querySelector(".cancel-btn").addEventListener("click", () => {
+            this.popup.remove();
         });
 
         // Add effect button
@@ -159,8 +194,32 @@ App.PopupItemForm = class
             this.#addEffect();
         });
 
-        // Add effects listeners
+        // Other listerners
+        this.#attachPropertiesListeners(form);
         this.#attachEffectListeners();
+    }
+
+    #attachPropertiesListeners(form)
+    {
+        // Variables
+        const isUniqueCheckbox = form.querySelector("#is_unique");
+        const usableCheckbox = form.querySelector("#usable");
+        const maxStackGrp = form.querySelector("#max_stack_grp");
+        const autoUseGrp = form.querySelector("#auto_use_grp");
+        const allowMultipleUseGrp = form.querySelector("#allow_multiple_use_grp");
+        const isConsumableGrp = form.querySelector("#is_consumable_grp");
+
+        // Add isUniqueCheckbox changed Listener
+        isUniqueCheckbox.addEventListener("change", () => {
+            maxStackGrp.style.display = isUniqueCheckbox.checked ? "none" : "block";
+        });
+
+        // Add isConsumableCheckbox changed Listener
+        usableCheckbox.addEventListener("change", () => {
+            autoUseGrp.style.display = usableCheckbox.checked ? "block" : "none";
+            allowMultipleUseGrp.style.display = usableCheckbox.checked ? "block" : "none";
+            isConsumableGrp.style.display = usableCheckbox.checked ? "block" : "none";
+        });
     }
 
     // ----------------------------------- Effects Form Methods -----------------------------------
@@ -244,9 +303,13 @@ App.PopupItemForm = class
         const effectParamsContainer = this.popup.querySelector(`#effect-params-${effectIndex}`);
         let params = {};
         switch (effectType) {
+
+            // EQUIP WALLET SKIN
             case "equip_wallet_skin":
                 params = { wallet_name: "" };
                 break;
+
+            // MANAGE ROLE
             case "manage_role":
                 params = { action: "add", id: "" };
                 break;
@@ -313,16 +376,32 @@ App.PopupItemForm = class
     {
         const effects = this.#createItemEffects(form);
         return {
+            // IDENTITY
             id: this.items[this.itemIndex].id,
             name: form.querySelector("#name").value,
             icon: form.querySelector("#icon").value,
             category: form.querySelector("#category").value,
+            rarity: form.querySelector("#rarity").value,
+
+            // DETAILS
             image: form.querySelector("#image").value || null,
             description: form.querySelector("#description").value || null,
+
+            // POSSESS SETTINGS
             is_unique: form.querySelector("#is_unique").checked,
+            max_stack: parseInt(form.querySelector("#max_stack").value),
+
+            // USE SETTINGS
+            usable: form.querySelector("#usable").checked,
             auto_use: form.querySelector("#auto_use").checked,
+            allow_multiple_use: form.querySelector("#allow_multiple_use").checked,
             is_consumable: form.querySelector("#is_consumable").checked,
-            effects: effects.length > 0 ? effects : null
+
+            // EFFECTS
+            effects: effects.length > 0 ? effects : [],
+
+            // ENABLED
+            enabled: form.querySelector("#enabled").checked
         };
     }
 

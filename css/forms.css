@@ -15,6 +15,10 @@
     -webkit-mask-composite: source-in;
 }
 
+.form-label-checkbox {
+    width: fit-content;
+}
+
 optional {
     color: var(--text-very-low-color);
     margin: 10px 0;
@@ -25,7 +29,7 @@ form-label {
     text-align: left;
     font-size: 1.2rem;
     color: var(--text-light-color);
-    margin: 30px 0 10px 0;
+    margin: 40px 0 10px 0;
     padding: 0 0 5px 0;
     border-bottom: solid;
     border-color: var(--color-3);
@@ -94,8 +98,6 @@ form-group .effect-item {
 }
 
 /* ###################################### SPECIFIC STYLES ###################################### */
-
-/* -------------------------------------- Popup Item Form -------------------------------------- */
 
 #popup-item-form .popup-buttons {
     padding-top: 10px;

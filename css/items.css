@@ -1,5 +1,5 @@
 .items-list-container {
-    margin-top: var(--items-container-y-padding);
+    flex: 1;
     mask-image: 
         linear-gradient(to bottom, transparent 0%, black var(--items-gradient-height)),
         linear-gradient(to top, transparent 0%, black var(--items-gradient-height));
@@ -12,7 +12,13 @@
 
 .items-scrollable-list {
     padding: var(--items-gradient-height) 10px 10px 10px;
-    max-height: calc(100vh - calc(var(--header-height) + var(--container-y-padding) + var(--toolbar-height) + var(--items-container-y-padding)));
+    max-height: calc(
+        100vh 
+        - var(--header-height) 
+        - var(--container-y-padding) * 2
+        - var(--toolbar-height) 
+        - var(--sub-container-y-padding)
+    );
     overflow-y: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -20,8 +26,9 @@
 }
 
 .item-card {
-    padding: 15px;
-    border-radius: 10px;
+    padding: 15px 15px calc(var(--item-card-border-height) + 15px) 15px;
+    border-radius: 5px;
+    background-clip: padding-box;
     position: relative;
     text-align: center;
     cursor: pointer;
@@ -90,4 +97,53 @@
 
 .delete-item-btn:active {
     background-color: var(--btn-delete-color-active);
+}
+
+.item-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--item-card-border-height);
+    background-size: 300% 100%;
+    animation: item-card-gradient-anim 3s linear infinite
+}
+
+.item-card[data-rarity="Common"]::after {
+    background-image: linear-gradient(315deg, var(--color-common-1), var(--color-common-2), var(--color-common-1), var(--color-common-2));
+}
+.item-card[data-rarity="Uncommon"]::after {
+    background-image: linear-gradient(315deg, var(--color-uncommon-1), var(--color-uncommon-2), var(--color-uncommon-1), var(--color-uncommon-2));
+}
+.item-card[data-rarity="Rare"]::after {
+    background-image: linear-gradient(315deg, var(--color-rare-1), var(--color-rare-2), var(--color-rare-1), var(--color-rare-2));
+}
+.item-card[data-rarity="Epic"]::after {
+    background-image: linear-gradient(315deg, var(--color-epic-1), var(--color-epic-2), var(--color-epic-1), var(--color-epic-2));
+}
+.item-card[data-rarity="Legendary"]::after {
+    background-image: linear-gradient(315deg, var(--color-legendary-1), var(--color-legendary-2), var(--color-legendary-1), var(--color-legendary-2));
+}
+.item-card[data-rarity="Mythic"]::after {
+    background-image: linear-gradient(315deg, var(--color-mythic-1), var(--color-mythic-2), var(--color-mythic-1), var(--color-mythic-2));
+    animation: item-card-gradient-anim 3s linear infinite, item-card-pulse-anim 1s ease-in-out infinite;;
+}
+.item-card[data-rarity="Divine"]::after {
+    background-image: linear-gradient(315deg, var(--color-divine-1), var(--color-divine-2), var(--color-divine-1), var(--color-divine-2));
+    animation: item-card-gradient-anim 3s linear infinite, item-card-pulse-anim 1s ease-in-out infinite;;
+}
+
+@keyframes item-card-gradient-anim {
+    0% {
+        background-position-x: 0%;
+    }
+    100% {
+        background-position-x: 100%;
+    }
+}
+
+@keyframes item-card-pulse-anim {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.4); }
 }

@@ -4,8 +4,9 @@
     --toolbar-height: 80px;
     --container-x-padding: 75px;
     --container-y-padding: 30px;
-    --items-container-y-padding: 10px;
+    --sub-container-y-padding: 10px;
     --items-gradient-height: 15px;
+    --item-card-border-height: 10px;
 
     /* Font Sizes */
     --normal-font-size: 0.85rem;
@@ -36,4 +37,20 @@
     --color-1: #19191D;
     --color-2: #212226;
     --color-3: #303137;
+
+    /* Rarity Colors */
+    --color-common-1: #808080;
+    --color-common-2: #808080;
+    --color-uncommon-1: #388863;
+    --color-uncommon-2: #64E39A;
+    --color-rare-1: #3863BD;
+    --color-rare-2: #60AFE8;
+    --color-epic-1: #583EA9;
+    --color-epic-2: #8947c4;
+    --color-legendary-1: #ff7300;
+    --color-legendary-2: #ffcc15;
+    --color-mythic-1: #ff0000;
+    --color-mythic-2: #ff1275;
+    --color-divine-1: #000000;
+    --color-divine-2: #8300ff;
 }

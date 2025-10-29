@@ -5,7 +5,8 @@ App.items = JSON.parse(localStorage.getItem("items")) || [];
 App.filteredItems = App.items.slice();
 App.itemFilters = {
     name: "",
-    category: ""
+    category: "",
+    rarity: ""
 };
 
 // ######################################## PUBLIC METHODS ########################################
@@ -114,20 +115,35 @@ App.exportItems = function()
 App.createDefaultItem = function() 
 {
     // Create default item
-    const defaultItem = {
+    return {
+
+        // IDENTITY
         id: crypto.randomUUID(),
         name: App.schema.items.properties.name.default,
         icon: App.schema.items.properties.icon.default,
         category: App.schema.items.properties.category.default,
+        rarity: App.schema.items.properties.rarity.default,
+
+        // DETAILS
         image: App.schema.items.properties.image.default,
         description: App.schema.items.properties.description.default,
-        is_unique: App.schema.items.properties.is_unique.default,
-        auto_use: App.schema.items.properties.auto_use.default,
-        is_consumable: App.schema.items.properties.is_consumable.default,
-        effects: App.schema.items.properties.effects.default
-    };
 
-    return defaultItem;
+        // POSSESS SETTINGS
+        is_unique: App.schema.items.properties.is_unique.default,
+        max_stack: App.schema.items.properties.max_stack.default,
+
+        // USE SETTINGS
+        usable: App.schema.items.properties.usable.default,
+        auto_use: App.schema.items.properties.auto_use.default,
+        allow_multiple_use: App.schema.items.properties.allow_multiple_use.default,
+        is_consumable: App.schema.items.properties.is_consumable.default,
+        
+        // EFFECTS
+        effects: App.schema.items.properties.effects.default,
+
+        // ENABLED
+        enabled: App.schema.items.properties.enabled.default,
+    };
 }
 
 App.saveItems = function() 
@@ -181,6 +197,7 @@ App.updateFilteredItems = function()
     App.filteredItems = App.items.filter(item => {
         const matchesName = item.name.toLowerCase().includes(App.itemFilters.name.toLowerCase());
         const matchesCategory = !App.itemFilters.category || item.category === App.itemFilters.category;
-        return matchesName && matchesCategory;
+        const matchesRarity = !App.itemFilters.rarity || item.rarity === App.itemFilters.rarity;
+        return matchesName && matchesCategory && matchesRarity;
     });
 }

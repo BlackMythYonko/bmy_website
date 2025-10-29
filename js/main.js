@@ -44,7 +44,7 @@ App.openPopupItemForm = function(itemIndex)
 
 App.onInputSearchItemChanged = function()
 {
-    const searchInput = document.querySelector("#item-search");
+    const searchInput = document.querySelector("#item-search-filter");
     if (searchInput) {
         App.itemFilters.name = searchInput.value.trim();
         App.updateFilteredItems();
@@ -62,6 +62,16 @@ App.onCategoryFilterChanged = function()
     }
 }
 
+App.onRarityFilterChanged = function()
+{
+    const rarityFilter = document.querySelector("#rarity-filter");
+    if (rarityFilter) {
+        App.itemFilters.rarity = rarityFilter.value;
+        App.updateFilteredItems();
+        App.renderItems();
+    }
+}
+
 App.renderItems = function() 
 {
     // Variables
@@ -70,7 +80,7 @@ App.renderItems = function()
 
     // Loop on each item and add item-card
     list.innerHTML = reversedItems.map((item, reversedIndex) => `
-        <div class="item-card" onclick="App.openPopupItemForm(${App.items.length - 1 - reversedIndex})">
+        <div class="item-card" data-rarity="${item.rarity}" onclick="App.openPopupItemForm(${App.items.length - 1 - reversedIndex})">
             <div class="icon">${item.icon}</div>
             <div class="name">${item.name}</div>
             <div class="category">${item.category}</div>
